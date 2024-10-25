@@ -15,3 +15,13 @@ nistkat/PQCgenKAT_kem1024
 nistkat/*.req
 nistkat/*.rsp
 .kyber_api.c.kate-swp
+public_key.bin
+secret_key.bin
+ciphertext.bin
+shared_secret_enc.bin
+shared_secret_dec.bin
+pk_hex.txt
+ss_hex.txt
+sk_hex.txt
+ct_hex.txt
+ss_hex_dec.txt
