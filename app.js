@@ -41,7 +41,7 @@ app.post('/todos', (req, res) => {
 });
 
 app.get('/download', (req, res) => {
-    const file = `${__dirname}/todo-log.txt`;
+    const file = `${__dirname}/ref/kyber3.csv`;
     res.download(file); 
 });
 

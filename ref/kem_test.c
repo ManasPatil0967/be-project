@@ -6,7 +6,7 @@
 #include "params.h"
 #include <inttypes.h>
 
-const int N_TESTS = 1e3;
+const int N_TESTS = 1e4;
 
 char* hex_string(uint8_t* data, size_t len) {
     char* hex = (char*)malloc(len * 2 + 1);
@@ -41,7 +41,7 @@ int main() {
 
     uint64_t init, after_keypair, after_enc, after_dec;
 
-    const char* csv_file = "kyber2.csv";
+    const char* csv_file = "kyber3.csv";
     FILE* fp = fopen(csv_file, "w");
     if (fp == NULL) {
         printf("Error: failed to open file.\n");
