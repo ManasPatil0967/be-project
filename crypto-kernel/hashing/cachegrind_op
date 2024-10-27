@@ -1,0 +1,652 @@
+--------------------------------------------------------------------------------
+-- Metadata
+--------------------------------------------------------------------------------
+Invocation:       /usr/local/bin/cg_annotate cachegrind.out.5363
+Command:          ./hash_test
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Threshold:        0.1%
+Annotation:       on
+
+--------------------------------------------------------------------------------
+-- Summary
+--------------------------------------------------------------------------------
+Ir______________ 
+
+168,566 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+-- File:function summary
+--------------------------------------------------------------------------------
+  Ir___________________  file:function
+
+< 35,000 (20.8%, 20.8%)  ./elf/./elf/dl-tunables.c:
+  34,197 (20.3%)           __GI___tunables_init
+     608  (0.4%)           __tunable_get_val
+
+< 33,696 (20.0%, 40.8%)  ./elf/./elf/dl-lookup.c:
+  21,254 (12.6%)           do_lookup_x
+   7,944  (4.7%)           _dl_lookup_symbol_x
+   4,498  (2.7%)           check_match
+
+< 15,522  (9.2%, 50.0%)  ./elf/./elf/dl-reloc.c:
+  15,446  (9.2%)           _dl_relocate_object
+
+<  8,106  (4.8%, 54.8%)  ./elf/../sysdeps/generic/dl-new-hash.h:_dl_lookup_symbol_x
+
+<  7,983  (4.7%, 59.5%)  ./stdio-common/./stdio-common/vfprintf-internal.c:__vfprintf_internal
+
+<  7,108  (4.2%, 63.7%)  ???:
+   6,093  (3.6%)           KeccakF1600_StatePermute
+     487  (0.3%)           pqcrystals_kyber_fips202_ref_sha3_256
+     269  (0.2%)           ???
+     248  (0.1%)           main
+
+<  5,331  (3.2%, 66.9%)  ./string/../sysdeps/x86_64/multiarch/../multiarch/strcmp-sse2.S:
+   5,300  (3.1%)           strcmp
+
+<  4,903  (2.9%, 69.8%)  ./elf/./elf/dl-tunables.h:
+   4,883  (2.9%)           __GI___tunables_init
+
+<  4,371  (2.6%, 72.4%)  ./elf/../sysdeps/x86/dl-cacheinfo.h:
+   3,365  (2.0%)           intel_check_word.constprop.0
+     561  (0.3%)           handle_intel.constprop.0
+     233  (0.1%)           get_common_cache_info.constprop.0
+     212  (0.1%)           init_cpu_features.constprop.0
+
+<  3,945  (2.3%, 74.7%)  ./elf/./elf/do-rel.h:
+   3,871  (2.3%)           _dl_relocate_object
+
+<  3,841  (2.3%, 77.0%)  ./elf/../sysdeps/x86_64/dl-machine.h:
+   3,728  (2.2%)           _dl_relocate_object
+
+<  2,618  (1.6%, 78.6%)  ./elf/./elf/dl-version.c:
+   2,547  (1.5%)           _dl_check_map_versions
+
+<  2,604  (1.5%, 80.1%)  ./stdio-common/./stdio-common/vfprintf-process-arg.c:__vfprintf_internal
+
+<  2,526  (1.5%, 81.6%)  ./libio/./libio/fileops.c:
+   2,271  (1.3%)           _IO_file_xsputn@@GLIBC_2.2.5
+
+<  2,421  (1.4%, 83.0%)  ./elf/./elf/dl-load.c:
+   1,479  (0.9%)           _dl_map_object_from_fd
+     464  (0.3%)           _dl_map_object
+     173  (0.1%)           open_verify.constprop.0
+     171  (0.1%)           _dl_init_paths
+
+<  2,413  (1.4%, 84.5%)  ./elf/../bits/stdlib-bsearch.h:intel_check_word.constprop.0
+
+<  1,425  (0.8%, 85.3%)  ./elf/./elf/rtld.c:
+   1,048  (0.6%)           dl_main
+     199  (0.1%)           _dl_start
+
+<  1,325  (0.8%, 86.1%)  ./malloc/./malloc/malloc.c:
+     776  (0.5%)           ptmalloc_init.part.0
+     223  (0.1%)           _int_malloc
+
+<  1,152  (0.7%, 86.8%)  ./string/../sysdeps/x86_64/multiarch/strchr-avx2.S:__strchrnul_avx2
+
+<    985  (0.6%, 87.4%)  ./elf/./elf/dl-deps.c:
+     951  (0.6%)           _dl_map_object_deps
+
+<    962  (0.6%, 87.9%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:
+     546  (0.3%)           __memcpy_avx_unaligned_erms
+     281  (0.2%)           memcpy
+
+<    928  (0.6%, 88.5%)  ./stdio-common/./stdio-common/printf.c:printf
+
+<    924  (0.5%, 89.0%)  ./stdio-common/./stdio-common/_itoa.c:_itoa_word
+
+<    802  (0.5%, 89.5%)  ./elf/./elf/dl-hwcaps.c:
+     722  (0.4%)           _dl_important_hwcaps
+
+<    744  (0.4%, 90.0%)  ./elf/./elf/dl-cache.c:
+     463  (0.3%)           _dl_cache_libcmp
+     202  (0.1%)           search_cache
+
+<    739  (0.4%, 90.4%)  ./elf/../sysdeps/generic/ldsodefs.h:
+     400  (0.2%)           do_lookup_x
+     285  (0.2%)           _dl_relocate_object
+
+<    704  (0.4%, 90.8%)  ./elf/./elf/dl-object.c:
+     592  (0.4%)           _dl_new_object
+
+<    680  (0.4%, 91.2%)  ./nptl/./nptl/libc-cleanup.c:
+     408  (0.2%)           __libc_cleanup_push_defer
+     272  (0.2%)           __libc_cleanup_pop_restore
+
+<    672  (0.4%, 91.6%)  ./stdio-common/../libio/libioP.h:__vfprintf_internal
+
+<    624  (0.4%, 92.0%)  ./elf/./elf/dl-minimal-malloc.c:
+     552  (0.3%)           __minimal_malloc
+
+<    618  (0.4%, 92.4%)  ./elf/./elf/dl-hwcaps_split.c:
+     393  (0.2%)           _dl_hwcaps_split
+     201  (0.1%)           _dl_hwcaps_split_masked
+
+<    608  (0.4%, 92.7%)  ./stdio-common/./stdio-common/printf-parse.h:
+     352  (0.2%)           read_int
+     256  (0.2%)           __vfprintf_internal
+
+<    598  (0.4%, 93.1%)  ./elf/./get-dynamic-info.h:
+     335  (0.2%)           dl_main
+     263  (0.2%)           _dl_start
+
+<    598  (0.4%, 93.4%)  ./elf/../elf/dl-tls.c:
+     329  (0.2%)           _dl_allocate_tls_storage
+
+<    560  (0.3%, 93.8%)  ./elf/./elf/get-dynamic-info.h:_dl_map_object_from_fd
+
+<    551  (0.3%, 94.1%)  ./elf/./elf/dl-sort-maps.c:
+     284  (0.2%)           dfs_traversal.part.0
+     256  (0.2%)           _dl_sort_maps
+
+<    460  (0.3%, 94.4%)  ./elf/./elf/dl-environ.c:_dl_next_ld_env_entry
+
+<    414  (0.2%, 94.6%)  ./elf/./elf/dl-misc.c:
+     373  (0.2%)           _dl_name_match_p
+
+<    376  (0.2%, 94.8%)  ./elf/./elf/dl-runtime.c:_dl_fixup
+
+<    370  (0.2%, 95.0%)  ./string/../sysdeps/x86_64/multiarch/../multiarch/strchr-sse2.S:index
+
+<    337  (0.2%, 95.2%)  ./elf/../sysdeps/unix/sysv/linux/dl-sysdep.c:
+     303  (0.2%)           _dl_sysdep_parse_arguments
+
+<    335  (0.2%, 95.4%)  ./string/../sysdeps/x86_64/multiarch/../multiarch/memset-vec-unaligned-erms.S:memset
+
+<    325  (0.2%, 95.6%)  ./elf/./elf/dl-lookup-direct.c:
+     172  (0.1%)           _dl_lookup_direct
+
+<    320  (0.2%, 95.8%)  ./elf/../sysdeps/generic/dl-protected.h:do_lookup_x
+
+<    316  (0.2%, 96.0%)  ./string/../sysdeps/x86_64/multiarch/../multiarch/strlen-sse2.S:strlen
+
+<    296  (0.2%, 96.2%)  ./elf/./dl-map-segments.h:_dl_map_object_from_fd
+
+<    291  (0.2%, 96.4%)  ./elf/./elf/dl-init.c:
+     220  (0.1%)           call_init
+
+<    265  (0.2%, 96.5%)  ./string/../string/strcspn.c:strcspn
+
+<    237  (0.1%, 96.7%)  ./elf/./dl-find_object.h:_dl_find_object_from_map
+
+<    210  (0.1%, 96.8%)  ./elf/./elf/dl-fini.c:_dl_fini
+
+<    187  (0.1%, 96.9%)  ./elf/../sysdeps/unix/sysv/linux/dl-parse_auxv.h:_dl_sysdep_parse_arguments
+
+--------------------------------------------------------------------------------
+-- Function:file summary
+--------------------------------------------------------------------------------
+  Ir___________________  function:file
+
+> 39,080 (23.2%, 23.2%)  __GI___tunables_init:
+  34,197 (20.3%)           ./elf/./elf/dl-tunables.c
+   4,883  (2.9%)           ./elf/./elf/dl-tunables.h
+
+> 23,330 (13.8%, 37.0%)  _dl_relocate_object:
+  15,446  (9.2%)           ./elf/./elf/dl-reloc.c
+   3,871  (2.3%)           ./elf/./elf/do-rel.h
+   3,728  (2.2%)           ./elf/../sysdeps/x86_64/dl-machine.h
+     285  (0.2%)           ./elf/../sysdeps/generic/ldsodefs.h
+
+> 21,974 (13.0%, 50.1%)  do_lookup_x:
+  21,254 (12.6%)           ./elf/./elf/dl-lookup.c
+     400  (0.2%)           ./elf/../sysdeps/generic/ldsodefs.h
+     320  (0.2%)           ./elf/../sysdeps/generic/dl-protected.h
+
+> 16,050  (9.5%, 59.6%)  _dl_lookup_symbol_x:
+   8,106  (4.8%)           ./elf/../sysdeps/generic/dl-new-hash.h
+   7,944  (4.7%)           ./elf/./elf/dl-lookup.c
+
+> 11,515  (6.8%, 66.4%)  __vfprintf_internal:
+   7,983  (4.7%)           ./stdio-common/./stdio-common/vfprintf-internal.c
+   2,604  (1.5%)           ./stdio-common/./stdio-common/vfprintf-process-arg.c
+     672  (0.4%)           ./stdio-common/../libio/libioP.h
+     256  (0.2%)           ./stdio-common/./stdio-common/printf-parse.h
+
+>  6,093  (3.6%, 70.0%)  KeccakF1600_StatePermute:???
+
+>  5,778  (3.4%, 73.5%)  intel_check_word.constprop.0:
+   3,365  (2.0%)           ./elf/../sysdeps/x86/dl-cacheinfo.h
+   2,413  (1.4%)           ./elf/../bits/stdlib-bsearch.h
+
+>  5,321  (3.2%, 76.6%)  strcmp:
+   5,300  (3.1%)           ./string/../sysdeps/x86_64/multiarch/../multiarch/strcmp-sse2.S
+
+>  4,651  (2.8%, 79.4%)  check_match:
+   4,498  (2.7%)           ./elf/./elf/dl-lookup.c
+
+>  2,562  (1.5%, 80.9%)  _dl_check_map_versions:
+   2,547  (1.5%)           ./elf/./elf/dl-version.c
+
+>  2,523  (1.5%, 82.4%)  _dl_map_object_from_fd:
+   1,479  (0.9%)           ./elf/./elf/dl-load.c
+     560  (0.3%)           ./elf/./elf/get-dynamic-info.h
+     296  (0.2%)           ./elf/./dl-map-segments.h
+
+>  2,278  (1.4%, 83.7%)  _IO_file_xsputn@@GLIBC_2.2.5:
+   2,271  (1.3%)           ./libio/./libio/fileops.c
+
+>  1,579  (0.9%, 84.7%)  dl_main:
+   1,048  (0.6%)           ./elf/./elf/rtld.c
+     335  (0.2%)           ./elf/./get-dynamic-info.h
+
+>  1,152  (0.7%, 85.4%)  __strchrnul_avx2:./string/../sysdeps/x86_64/multiarch/strchr-avx2.S
+
+>    969  (0.6%, 85.9%)  _dl_map_object_deps:
+     951  (0.6%)           ./elf/./elf/dl-deps.c
+
+>    928  (0.6%, 86.5%)  printf:./stdio-common/./stdio-common/printf.c
+
+>    924  (0.5%, 87.0%)  _itoa_word:./stdio-common/./stdio-common/_itoa.c
+
+>    845  (0.5%, 87.5%)  ptmalloc_init.part.0:
+     776  (0.5%)           ./malloc/./malloc/malloc.c
+
+>    764  (0.5%, 88.0%)  _dl_important_hwcaps:
+     722  (0.4%)           ./elf/./elf/dl-hwcaps.c
+
+>    655  (0.4%, 88.4%)  _dl_new_object:
+     592  (0.4%)           ./elf/./elf/dl-object.c
+
+>    650  (0.4%, 88.8%)  _dl_start:
+     263  (0.2%)           ./elf/./get-dynamic-info.h
+     199  (0.1%)           ./elf/./elf/rtld.c
+
+>    608  (0.4%, 89.1%)  __tunable_get_val:./elf/./elf/dl-tunables.c
+
+>    561  (0.3%, 89.5%)  handle_intel.constprop.0:./elf/../sysdeps/x86/dl-cacheinfo.h
+
+>    552  (0.3%, 89.8%)  __minimal_malloc:./elf/./elf/dl-minimal-malloc.c
+
+>    546  (0.3%, 90.1%)  __memcpy_avx_unaligned_erms:./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+
+>    490  (0.3%, 90.4%)  _dl_sysdep_parse_arguments:
+     303  (0.2%)           ./elf/../sysdeps/unix/sysv/linux/dl-sysdep.c
+     187  (0.1%)           ./elf/../sysdeps/unix/sysv/linux/dl-parse_auxv.h
+
+>    487  (0.3%, 90.7%)  pqcrystals_kyber_fips202_ref_sha3_256:???
+
+>    464  (0.3%, 91.0%)  _dl_map_object:./elf/./elf/dl-load.c
+
+>    463  (0.3%, 91.2%)  _dl_cache_libcmp:./elf/./elf/dl-cache.c
+
+>    460  (0.3%, 91.5%)  _dl_next_ld_env_entry:./elf/./elf/dl-environ.c
+
+>    408  (0.2%, 91.8%)  __libc_cleanup_push_defer:./nptl/./nptl/libc-cleanup.c
+
+>    393  (0.2%, 92.0%)  _dl_hwcaps_split:./elf/./elf/dl-hwcaps_split.c
+
+>    391  (0.2%, 92.2%)  index:
+     370  (0.2%)           ./string/../sysdeps/x86_64/multiarch/../multiarch/strchr-sse2.S
+
+>    384  (0.2%, 92.4%)  _dl_fixup:
+     376  (0.2%)           ./elf/./elf/dl-runtime.c
+
+>    373  (0.2%, 92.7%)  init_cpu_features.constprop.0:
+     212  (0.1%)           ./elf/../sysdeps/x86/dl-cacheinfo.h
+
+>    373  (0.2%, 92.9%)  _dl_name_match_p:./elf/./elf/dl-misc.c
+
+>    360  (0.2%, 93.1%)  memset:
+     335  (0.2%)           ./string/../sysdeps/x86_64/multiarch/../multiarch/memset-vec-unaligned-erms.S
+
+>    352  (0.2%, 93.3%)  read_int:./stdio-common/./stdio-common/printf-parse.h
+
+>    343  (0.2%, 93.5%)  strlen:
+     316  (0.2%)           ./string/../sysdeps/x86_64/multiarch/../multiarch/strlen-sse2.S
+
+>    330  (0.2%, 93.7%)  _dl_allocate_tls_storage:
+     329  (0.2%)           ./elf/../elf/dl-tls.c
+
+>    284  (0.2%, 93.9%)  dfs_traversal.part.0:./elf/./elf/dl-sort-maps.c
+
+>    281  (0.2%, 94.0%)  memcpy:./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+
+>    272  (0.2%, 94.2%)  __libc_cleanup_pop_restore:./nptl/./nptl/libc-cleanup.c
+
+>    271  (0.2%, 94.4%)  strcspn:
+     265  (0.2%)           ./string/../string/strcspn.c
+
+>    269  (0.2%, 94.5%)  ???:???
+
+>    256  (0.2%, 94.7%)  _dl_sort_maps:./elf/./elf/dl-sort-maps.c
+
+>    248  (0.1%, 94.8%)  main:???
+
+>    237  (0.1%, 95.0%)  _dl_find_object_from_map:./elf/./dl-find_object.h
+
+>    233  (0.1%, 95.1%)  get_common_cache_info.constprop.0:./elf/../sysdeps/x86/dl-cacheinfo.h
+
+>    223  (0.1%, 95.2%)  _int_malloc:./malloc/./malloc/malloc.c
+
+>    220  (0.1%, 95.4%)  call_init:./elf/./elf/dl-init.c
+
+>    216  (0.1%, 95.5%)  search_cache:
+     202  (0.1%)           ./elf/./elf/dl-cache.c
+
+>    210  (0.1%, 95.6%)  _dl_fini:./elf/./elf/dl-fini.c
+
+>    201  (0.1%, 95.7%)  _dl_hwcaps_split_masked:./elf/./elf/dl-hwcaps_split.c
+
+>    174  (0.1%, 95.8%)  _dl_init_paths:
+     171  (0.1%)           ./elf/./elf/dl-load.c
+
+>    173  (0.1%, 95.9%)  open_verify.constprop.0:./elf/./elf/dl-load.c
+
+>    172  (0.1%, 96.0%)  _dl_lookup_direct:./elf/./elf/dl-lookup-direct.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/../bits/stdlib-bsearch.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/../bits/stdlib-bsearch.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/../elf/dl-tls.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/../elf/dl-tls.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/../sysdeps/generic/dl-new-hash.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/../sysdeps/generic/dl-new-hash.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/../sysdeps/generic/dl-protected.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/../sysdeps/generic/dl-protected.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/../sysdeps/generic/ldsodefs.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/../sysdeps/generic/ldsodefs.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/../sysdeps/unix/sysv/linux/dl-parse_auxv.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/../sysdeps/unix/sysv/linux/dl-parse_auxv.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/../sysdeps/unix/sysv/linux/dl-sysdep.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/../sysdeps/unix/sysv/linux/dl-sysdep.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/../sysdeps/x86/dl-cacheinfo.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/../sysdeps/x86/dl-cacheinfo.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/../sysdeps/x86_64/dl-machine.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/../sysdeps/x86_64/dl-machine.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./dl-find_object.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./dl-find_object.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./dl-map-segments.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./dl-map-segments.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-cache.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-cache.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-deps.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-deps.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-environ.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-environ.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-fini.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-fini.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-hwcaps.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-hwcaps.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-hwcaps_split.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-hwcaps_split.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-init.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-init.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-load.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-load.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-lookup-direct.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-lookup-direct.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-lookup.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-lookup.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-minimal-malloc.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-minimal-malloc.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-misc.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-misc.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-object.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-object.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-reloc.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-reloc.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-runtime.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-runtime.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-sort-maps.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-sort-maps.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-tunables.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-tunables.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-tunables.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-tunables.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/dl-version.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/dl-version.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/do-rel.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/do-rel.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/get-dynamic-info.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/get-dynamic-info.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./elf/rtld.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./elf/rtld.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./elf/./get-dynamic-info.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./elf/./get-dynamic-info.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./libio/./libio/fileops.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./libio/./libio/fileops.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./malloc/./malloc/malloc.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./malloc/./malloc/malloc.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./nptl/./nptl/libc-cleanup.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./nptl/./nptl/libc-cleanup.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./stdio-common/../libio/libioP.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./stdio-common/../libio/libioP.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./stdio-common/./stdio-common/_itoa.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./stdio-common/./stdio-common/_itoa.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./stdio-common/./stdio-common/printf-parse.h
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./stdio-common/./stdio-common/printf-parse.h
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./stdio-common/./stdio-common/printf.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./stdio-common/./stdio-common/printf.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./stdio-common/./stdio-common/vfprintf-internal.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./stdio-common/./stdio-common/vfprintf-internal.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./stdio-common/./stdio-common/vfprintf-process-arg.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./stdio-common/./stdio-common/vfprintf-process-arg.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./string/../string/strcspn.c
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./string/../string/strcspn.c
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./string/../sysdeps/x86_64/multiarch/../multiarch/memset-vec-unaligned-erms.S
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./string/../sysdeps/x86_64/multiarch/../multiarch/memset-vec-unaligned-erms.S
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./string/../sysdeps/x86_64/multiarch/../multiarch/strchr-sse2.S
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./string/../sysdeps/x86_64/multiarch/../multiarch/strchr-sse2.S
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./string/../sysdeps/x86_64/multiarch/../multiarch/strcmp-sse2.S
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./string/../sysdeps/x86_64/multiarch/../multiarch/strcmp-sse2.S
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./string/../sysdeps/x86_64/multiarch/../multiarch/strlen-sse2.S
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./string/../sysdeps/x86_64/multiarch/../multiarch/strlen-sse2.S
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./string/../sysdeps/x86_64/multiarch/strchr-avx2.S
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./string/../sysdeps/x86_64/multiarch/strchr-avx2.S
+
+--------------------------------------------------------------------------------
+-- Annotation summary
+--------------------------------------------------------------------------------
+Ir_____________ 
+
+      0            annotated: files known & above threshold & readable, line numbers known
+      0            annotated: files known & above threshold & readable, line numbers unknown
+      0          unannotated: files known & above threshold & two or more non-identical
+156,218 (92.7%)  unannotated: files known & above threshold & unreadable 
+  5,240  (3.1%)  unannotated: files known & below threshold
+  7,108  (4.2%)  unannotated: files unknown
+

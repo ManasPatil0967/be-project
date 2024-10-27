@@ -25,3 +25,5 @@ ss_hex.txt
 sk_hex.txt
 ct_hex.txt
 ss_hex_dec.txt
+cachegrind.*
+kem_test
