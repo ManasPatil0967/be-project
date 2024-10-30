@@ -10,8 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.21.1",
     "ffi-napi": "^4.0.3",
     "ref-napi": "^3.0.3"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.14"
   }
 }
