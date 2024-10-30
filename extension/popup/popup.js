@@ -1,5 +1,5 @@
 document.getElementById('button').addEventListener('click', async function() {
-    const serverUrl = 'http://35.239.38.217:3000';
+    const serverUrl = 'http://34.122.47.164:3000';
     
     try {
         // First test server connectivity
