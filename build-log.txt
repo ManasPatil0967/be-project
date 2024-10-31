@@ -1,0 +1,9 @@
+12/10/24 -  Added kyber implementation and added reference as separate folder
+21/10/24 -  Basic scripts are run on ref, CSVs kyber.csv and kyber2.csv are
+            generated
+23/10/24 -  Added extension directory, initialized manifest
+25/10/24 -  Removed kyber repo, valgrind memcheck, cachegrind, perf data
+            generated
+27/10/24 -  Further brute testing data generated, 1e4 keypairs with 1 ss and ct
+30/10/24 -  Extension UI initialized, VM setup.
+31/10/24 -  

@@ -1,5 +1,5 @@
 // Fetch data from the backend and display it
-fetch('/api/users')
+fetch('http://localhost:3000/api/users')
   .then(response => response.json())
   .then(data => {
     const userList = document.getElementById('userList');

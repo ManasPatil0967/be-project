@@ -1,11 +1,25 @@
 {
-  "manifest_version": 3,
-  "name": "Digital Identity Extension",
-  "description": "Base Level Extension",
-  "version": "1.0",
-  "action": {
-    "default_popup": "popup/index.html",
-    "default_icon": "icon.png"
-  }
+    "manifest_version": 3,
+    "name": "Digital Identity Extension",
+    "description": "Base Level Extension",
+    "version": "1.0",
+    "action": {
+        "default_popup": "popup/index.html",
+        "default_icon": "public/icon.png"
+    },
+    "permissions": [
+        "nativeMessaging",
+        "storage",
+        "activeTab",
+        "tabs",
+        "contextMenus"
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "host_permissions": [
+        "http://34.122.47.164:3000/*"
+    ]
 }
 

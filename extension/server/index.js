@@ -47,6 +47,49 @@ app.get('/generate-keypair', (req, res) => {
     }
 });
 
+app.get('/download/public-key', (req, res) => {
+    try {
+        const pkFile = path.join(__dirname, 'public_key.bin');
+        res.download(pkFile, 'public_key.bin');
+    } catch (error) {
+        console.error('Server error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.get('/download/secret-key', (req, res) => {
+    try {
+        const skFile = path.join(__dirname, 'secret_key.bin');
+        res.download(skFile, 'secret_key.bin');
+    } catch (error) {
+        console.error('Server error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/exchange', (req, res) => {
+    try {
+        const { publicKey } = req.body;
+        const publicKeyFile = 'public_key.bin';
+        // Save the public key to a file
+        fs.writeFileSync(publicKeyFile, publicKey, 'base64');
+        const ciphertextFile = 'ciphertext.bin';
+        const ssFile = 'shared_secret.bin';
+        const encResult = kyber.encrypt(publicKeyFile, ciphertextFile, ssFile);
+        if (encResult !== 0) {
+            console.error('Encryption failed with code:', encResult);
+            return res.status(500).json({ error: 'Encryption failed.' });
+        }
+        const ciphertext = fs.readFileSync(ciphertextFile, 'base64');
+        res.json({ ciphertext });
+    } catch (error) {
+        console.error('Server error:', error);
+        res.status(500).json({ error: error.message });
+
+    }
+});
+
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.json({ status: 'ok' });

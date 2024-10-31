@@ -1,118 +1,12 @@
-document.getElementById('button').addEventListener('click', async function() {
-    const serverUrl = 'http://34.122.47.164:3000';
-    
-    try {
-        // First test server connectivity
-        const healthCheck = await fetch(`${serverUrl}/health`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-            }
-        });
-        
-        if (!healthCheck.ok) {
-            throw new Error('Server is not responding properly');
-        }
-        
-        console.log('Generating keypair...');
-        const response = await fetch(`${serverUrl}/generate-keypair`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-            }
-        });
+import { KyberNativeMessaging } from "../src/kyberNM.js";
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Key generation failed');
-        }
+document.addEventListener("DOMContentLoaded", function () {
+    const kyberNM = new KyberNativeMessaging();
+    kyberNM.connect();
 
-        const { publicKey, secretKey } = await response.json();
-        console.log('Received keys successfully');
-
-        // Display the keys
-        const keyDisplay = document.createElement('div');
-        keyDisplay.innerHTML = `
-            <h3>Public Key:</h3>
-            <pre>${publicKey}</pre>
-            <h3>Secret Key:</h3>
-            <pre>${secretKey}</pre>
-        `;
-        document.body.appendChild(keyDisplay);
-
-    } catch (error) {
-        console.error('Error:', error);
-        // Display error to user
-        const errorDiv = document.createElement('div');
-        errorDiv.style.color = 'red';
-        errorDiv.textContent = `Error: ${error.message}`;
-        document.body.appendChild(errorDiv);
-    }
+    const button = document.getElementById("button");
+    button.addEventListener("click", async function () {
+        const res = await kyberNM.generateKeypair();
+        console.log(res);
+    });
 });
-
-document.getElementById('download-public-key').addEventListener('click', async function() {
-    try {
-        const serverUrl = 'http://35.239.38.217:3000';
-        const response = await fetch(`${serverUrl}/download/public-key`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/octet-stream'
-            }
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Download failed');
-        }
-
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'public_key.bin');
-        document.body.appendChild(link);
-        link.click();
-        link.parentNode.removeChild(link);
-    } catch (error) {
-        console.error('Error:', error);
-        // Display error to user
-        const errorDiv = document.createElement('div');
-        errorDiv.style.color = 'red';
-        errorDiv.textContent = `Error: ${error.message}`;
-        document.body.appendChild(errorDiv);
-    }
-});
-
-document.getElementById('download-secret-key').addEventListener('click', async function() {
-    try {
-        const serverUrl = 'http://35.239.38.217:3000';
-        const response = await fetch(`${serverUrl}/download/secret-key`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/octet-stream'
-            }
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Download failed');
-        }
-
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'secret_key.bin');
-        document.body.appendChild(link);
-        link.click();
-        link.parentNode.removeChild(link);
-    } catch (error) {
-        console.error('Error:', error);
-        // Display error to user
-        const errorDiv = document.createElement('div');
-        errorDiv.style.color = 'red';
-        errorDiv.textContent = `Error: ${error.message}`;
-        document.body.appendChild(errorDiv);
-    }
-});
-
