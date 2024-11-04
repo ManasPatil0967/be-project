@@ -175,3 +175,38 @@ int decrypt(const char* sk_file, const char* ct_file, const char* ss_file) {
 
     return 0;
 }
+
+typedef struct {
+    uint8_t pk[CRYPTO_PUBLICKEYBYTES];
+    uint8_t sk[CRYPTO_SECRETKEYBYTES];
+} keypair_t;
+
+uint8_t* buf_gen_keypair() {
+    keypair_t* keypair = (keypair_t*)malloc(sizeof(keypair_t));
+    if (crypto_kem_keypair(keypair->pk, keypair->sk) != 0) {
+        printf("Error: crypto_kem_keypair failed.\n");
+        return NULL;
+    }
+    return (uint8_t*)keypair;
+}
+
+uint8_t* buf_encrypt(uint8_t* pk, uint8_t* ct, uint8_t* ss) {
+    if (crypto_kem_enc(ct, ss, pk) != 0) {
+        printf("Error: crypto_kem_enc failed.\n");
+        return NULL;
+    }
+    return ct;
+}
+
+uint8_t* buf_decrypt(uint8_t* sk, uint8_t* ct, uint8_t* ss) {
+    if (crypto_kem_dec(ss, ct, sk) != 0) {
+        printf("Error: crypto_kem_dec failed.\n");
+        return NULL;
+    }
+    return ss;
+}
+
+void buf_free(uint8_t* buf) {
+    free(buf);
+}
+
