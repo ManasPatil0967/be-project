@@ -583,10 +583,6 @@ video {
   width: 100%;
 }
 
-.max-w-md {
-  max-width: 28rem;
-}
-
 .items-center {
   align-items: center;
 }
@@ -649,10 +645,6 @@ video {
 
 .p-6 {
   padding: 1.5rem;
-}
-
-.p-8 {
-  padding: 2rem;
 }
 
 .px-3 {
