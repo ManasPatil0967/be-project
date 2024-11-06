@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 cd /usr/local/src
 wget https://github.com/openssl/openssl/releases/download/openssl-3.4.0/openssl-3.4.0.tar.gz
+tar -xvf openssl-3.4.0.tar.gz
 cd /usr/local/src/openssl-3.4.0
 ./Configure --prefix=/usr/local/ssl --openssldir=/usr/local/ssl '-Wl,--enable-new-dtags,-rpath,$(LIBRPATH)'
 
