@@ -78,7 +78,7 @@ def demo_system():
     """Demonstrate the ZKP-based digital identity system."""
     
     id_system = DigitalIdentitySystem(
-        prime_field=3329
+        prime_field=101
     )
     
     
