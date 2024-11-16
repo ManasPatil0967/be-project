@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Websites</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 w-96">
+    <div class="p-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-800">Saved Websites</h2>
+                <button id="back-btn" class="text-sm text-gray-500 hover:text-gray-700">
+                    Back
+                </button>
+            </div>
+
+            <div id="sites-list" class="space-y-4">
+                <!-- Sites will be dynamically inserted here -->
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-gray-700">example.com</h3>
+                            <p class="text-xs text-gray-500 mt-1">Last used: 2 days ago</p>
+                        </div>
+                        <button class="text-blue-500 hover:text-blue-600 text-sm">
+                            Copy Password
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fetch saved sites from VM1
+        async function fetchSavedSites() {
+            try {
+                const response = await fetch('https://vm1-address/api/sites', {
+                    credentials: 'include'
+                });
+                const sites = await response.json();
+                
+                const sitesList = document.getElementById('sites-list');
+                sitesList.innerHTML = sites.map(site => `
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-700">${site.website_url}</h3>
+                                <p class="text-xs text-gray-500 mt-1">Last used: ${timeAgo(site.last_used)}</p>
+                            </div>
+                            <button class="text-blue-500 hover:text-blue-600 text-sm" 
+                                onclick="copyPassword('${site.website_url}')">
+                                Copy Password
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Failed to fetch saved sites:', error);
+            }
+        }
+
+        document.getElementById('back-btn').addEventListener('click', () => {
+            window.location.href = 'popup.html';
+        });
+
+        // Copy password to clipboard
+        function copyPassword(websiteUrl) {
+            // Fetch password from VM1
+            fetch(`https://vm1-address/api/sites/${websiteUrl}/password`, {
+                credentials: 'include'
+            })
+            .then(response => response.text())
+            .then(password => {
+                // Copy password to clipboard
+                navigator.clipboard.writeText(password)
+                .then(() => alert('Password copied to clipboard'))
+                .catch(error => console.error('Failed to copy password:', error));
+            })
+            .catch(error => console.error('Failed to fetch password:', error));
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', fetchSavedSites);
+    </script>
+</body>
+</html>

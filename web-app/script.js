@@ -1,36 +1,73 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('identityForm');
-    const emailInput = document.getElementById('email');
-    const errorMessage = document.getElementById('errorMessage');
+const snarkjs = require('snarkjs');
+const fs = require('fs');
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = emailInput.value.trim();
+const generateZKProof = async (age, sapId) => {
+    const { proof, publicSignals } = await snarkjs.groth16.fullProve({ age: 19,
+        sapID: [1,2,3,4,5,6,7,8,9,0,1]}, 
+        "circuit.wasm", 
+        "circuit.zkey"
+    );
 
-        if (!email) {
-            showError('Email is required');
-            return;
-        }
+    return { proof, publicSignals };
+};
 
-        if (!/\S+@\S+\.\S+/.test(email)) {
-            showError('Invalid email format');
-            return;
-        }
+const verifyProof = async (proofData) => {
+    const { proof, publicSignals } = proofData;
 
-        // Here you would typically send the email to your backend
-        console.log('Email submitted:', email);
+    const vKey = JSON.parse(await fs.promises.readFile('verification_key.json', 'utf-8'));
 
-        // Reset form
-        emailInput.value = '';
-        hideError();
+    return snarkjs.groth16.verify(vKey, publicSignals, proof);
+}
+
+const registerUser = async (email) => {
+    const res = await fetch('https://vm1.dappnode.net/api/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
     });
 
-    function showError(message) {
-        errorMessage.querySelector('span').textContent = message;
-        errorMessage.classList.remove('hidden');
+    if (!res.ok) {
+        throw new Error('Failed to register user');
     }
 
-    function hideError() {
-        errorMessage.classList.add('hidden');
+    return await res.json();
+}
+
+document.getElementById('registration-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const sapIdVal = document.getElementById('sapId').value;
+    const sapId = sapIdVal.split('').map(String);
+    const age = document.getElementById('age').value.toString();
+
+    if (!email) {
+        alert('Email is required');
+        return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+        alert('Invalid email format');
+        return;
+    }
+    document.getElementById('verification-status').classList.remove('hidden');
+
+    try {
+        const proofData = await generateZKProof(age, sapId);
+
+        const verificationResult = await verifyProof(proofData);
+
+        if (verificationResult.verified) {
+            const registration = await registerUser(email);
+
+            if (registration.success) {
+                document.cookie = `digital_identity=${registration.identity}; Secure; SameSite=Strict`;
+                window.location.href = '/success';
+            }
+        }
+    } catch (error) {
+        console.error('Registration failed:', error);
     }
 });

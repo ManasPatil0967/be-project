@@ -12,7 +12,11 @@
         "storage",
         "activeTab",
         "tabs",
-        "contextMenus"
+        "contextMenus",
+        "cookies",
+        "webRequest",
+        "scripting",
+        "storage"
     ],
     "background": {
         "service_worker": "background.js",

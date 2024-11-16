@@ -210,3 +210,7 @@ void buf_free(uint8_t* buf) {
     free(buf);
 }
 
+const char* generate_password(uint8_t length, uint8_t* pkSeed, uint8_t* skSeed) {
+   const char* password = "password";
+   return password;
+}

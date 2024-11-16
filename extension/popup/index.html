@@ -3,33 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Identity Extension</title>
-    <link href="./output.css" rel="stylesheet">
+    <title>Digital Identity</title>
+    <link rel="stylesheet" href="output.css">
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
-    <div class="w-full max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-        <div class="p-6">
-            <h2 class="text-2xl font-bold text-center text-gray-800">Digital Identity System</h2>
-            <p class="mt-2 text-center text-gray-600">Enter your email to get started with your digital identity</p>
-        </div>
-        <form id="identityForm" class="p-6 pt-0">
-            <div class="space-y-4">
-                <div class="space-y-2">
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input 
-                        id="email"
-                        type="email"
-                        placeholder="you@example.com"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                    >
-                </div>
+<body class="bg-gray-100 w-96">
+    <div id="landing" class="p-6">
+        <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+            <div class="mb-4">
+                <svg class="w-16 h-16 mx-auto text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
             </div>
-            <div class="mt-6">
-                <button type="submit" class="w-full px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    Continue
+            <h1 class="text-2xl font-bold text-gray-800 mb-4">Welcome to Digital Identity</h1>
+            <p class="text-gray-600 mb-6">Your secure identity management solution</p>
+            <button id="redirect-btn" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                Get Started
+            </button>
+        </div>
+    </div>
+
+    <div id="home" class="p-6 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-800">Hello, <span id="user-email">User</span></h2>
+                <button id="logout-btn" class="text-sm text-gray-500 hover:text-gray-700">Logout</button>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h3 class="text-sm font-medium text-gray-700 mb-2">Current Website</h3>
+                    <p id="current-url" class="text-gray-600 text-sm truncate">No active website</p>
+                </div>
+                <button id="generate-pwd" class="w-full bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                    Generate Password
+                </button>
+                <button id="view-sites" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                    View Saved Sites
                 </button>
             </div>
-        </form>
+        </div>
     </div>
 
     <script src="popup.js"></script>

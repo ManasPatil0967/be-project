@@ -1,18 +1,16 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const cors = require('cors');  // Add CORS middleware
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const ffi = require("ffi-napi");
 
 const app = express();
 
-// Enable CORS for all routes
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Something broke!' });
@@ -66,29 +64,6 @@ app.get('/download/secret-key', (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
-app.post('/exchange', (req, res) => {
-    try {
-        const { publicKey } = req.body;
-        const publicKeyFile = 'public_key.bin';
-        // Save the public key to a file
-        fs.writeFileSync(publicKeyFile, publicKey, 'base64');
-        const ciphertextFile = 'ciphertext.bin';
-        const ssFile = 'shared_secret.bin';
-        const encResult = kyber.encrypt(publicKeyFile, ciphertextFile, ssFile);
-        if (encResult !== 0) {
-            console.error('Encryption failed with code:', encResult);
-            return res.status(500).json({ error: 'Encryption failed.' });
-        }
-        const ciphertext = fs.readFileSync(ciphertextFile, 'base64');
-        res.json({ ciphertext });
-    } catch (error) {
-        console.error('Server error:', error);
-        res.status(500).json({ error: error.message });
-
-    }
-});
-
 
 // Health check endpoint
 app.get('/health', (req, res) => {
