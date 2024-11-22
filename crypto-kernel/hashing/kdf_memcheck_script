@@ -1,0 +1,9 @@
+gcc -O0 kdf_memcheck.c fips202.c symmetric-shake.c -o kdf_memcheck_0 
+gcc -O1 kdf_memcheck.c fips202.c symmetric-shake.c -o kdf_memcheck_1 
+gcc -O2 kdf_memcheck.c fips202.c symmetric-shake.c -o kdf_memcheck_2 
+gcc -O3 -march=native -flto -funroll-loops -fopenmp kdf_memcheck.c fips202.c symmetric-shake.c -o kdf_memcheck_3 
+
+valgrind --tool=memcheck -s ./kdf_memcheck_0 10
+valgrind --tool=memcheck -s ./kdf_memcheck_1 10
+valgrind --tool=memcheck -s ./kdf_memcheck_2 10
+valgrind --tool=memcheck -s ./kdf_memcheck_3 10

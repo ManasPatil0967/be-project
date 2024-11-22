@@ -1,0 +1,40 @@
+gcc -O0 kdf.c fips202.c symmetric-shake.c -o kdf_0 
+gcc -O1 kdf.c fips202.c symmetric-shake.c -o kdf_1 
+gcc -O2 kdf.c fips202.c symmetric-shake.c -o kdf_2 
+gcc -O3 -march=native -flto -funroll-loops -fopenmp kdf.c fips202.c symmetric-shake.c -o kdf_3 
+
+./kdf_0 1
+./kdf_0 10
+./kdf_0 100
+./kdf_0 1000
+./kdf_0 10000
+./kdf_0 100000
+./kdf_0 1000000
+./kdf_0 10000000
+
+./kdf_1 1
+./kdf_1 10
+./kdf_1 100
+./kdf_1 1000
+./kdf_1 10000
+./kdf_1 100000
+./kdf_1 1000000
+./kdf_1 10000000
+
+./kdf_2 1
+./kdf_2 10
+./kdf_2 100
+./kdf_2 1000
+./kdf_2 10000
+./kdf_2 100000
+./kdf_2 1000000
+./kdf_2 10000000
+
+./kdf_3 1
+./kdf_3 10
+./kdf_3 100
+./kdf_3 1000
+./kdf_3 10000
+./kdf_3 100000
+./kdf_3 1000000
+./kdf_3 10000000

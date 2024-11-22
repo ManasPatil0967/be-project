@@ -20,7 +20,7 @@ const verifyProof = async (proofData) => {
 }
 
 const registerUser = async (email) => {
-    const res = await fetch('https://vm1.dappnode.net/api/users', {
+    const res = await fetch('https://vm1.dappnode.net/gen-identity', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ document.getElementById('registration-form').addEventListener('submit', async (e
             const registration = await registerUser(email);
 
             if (registration.success) {
-                document.cookie = `digital_identity=${registration.identity}; Secure; SameSite=Strict`;
+                document.cookie = `digital_identity=${registration.privateIdentity}; Secure; SameSite=Strict`;
                 window.location.href = '/success';
             }
         }
