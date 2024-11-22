@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "serve": "pm2 kill && pm2 start app.js",
     "gcc-script": "cd ref && gcc -shared -o libkyber.so -fPIC kyber_api.c kem.c cbd.c fips202.c indcpa.c ntt.c poly.c polyvec.c randombytes.c reduce.c symmetric-shake.c verify.c && node script.js && cd ..",
     "clean-files": "cd ref && rm -rf shared_secret_enc.bin shared_secret_dec.bin ciphertext.bin public_key.bin secret_key.bin pk_hex.txt sk_hex.txt ss_hex.txt ss_hex_dec.txt kyber768-data.csv && cd .."
@@ -22,5 +22,10 @@
     "ref-napi": "^3.0.3",
     "snarkjs": "^0.7.5",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "chai": "^5.1.2",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
   }
 }
