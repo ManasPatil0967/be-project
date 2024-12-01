@@ -12,9 +12,16 @@ app.use(bodyParser.json());
 
 const db = new sqlite3.Database('identity.db');
 
-// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Ensure all other routes respond correctly
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+
+app.get('/success', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'success.html'));
 });
 
 // Initialize database schema

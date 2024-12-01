@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Identity Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-md">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Digital Identity</h1>
+                <p class="text-gray-600">Secure Registration</p>
+            </div>
+
+            <form id="registration-form" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address
+                    </label>
+                    <input type="email" id="email" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        SAP ID
+                    </label>
+                    <input type="text" id="sapId" required pattern="[0-9]{11}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <p class="mt-1 text-sm text-gray-500">11-digit SAP ID number</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Age
+                    </label>
+                    <input type="number" id="age" required min="18"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+
+                <div id="verification-status" class="hidden">
+                    <div class="flex items-center space-x-2 text-sm">
+                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span class="text-green-600">Verification in progress...</span>
+                    </div>
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+                    Register
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="snarkjs.min.js"></script>
+
+    <script>
+
+    const generateZKProof = async (age, sapId) => {
+        const { proof, publicSignals } = await snarkjs.groth16.fullProve(
+                { age: Number(age), sapID: sapId },
+                'circuit.wasm',
+                'circuit.zkey'
+                );
+
+        console.log(proof, publicSignals);
+        return { proof, publicSignals };
+    };
+
+const verifyProof = async (proofData) => {
+    const { proof, publicSignals } = proofData;
+
+    const vKey = await fetch('verification_key.json').then((res) => res.json());
+
+    return snarkjs.groth16.verify(vKey, publicSignals, proof);
+};
+
+const registerUser = async (email) => {
+    const res = await fetch('http://34.55.135.135:3000/gen-identity/', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+},
+body: JSON.stringify({ email }),
+});
+
+if (!res.ok) {
+    throw new Error('Failed to register user');
+}
+
+return await res.json();
+};
+
+document.getElementById('registration-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const sapIdVal = document.getElementById('sapId').value;
+        const sapId = sapIdVal.split('').map(Number); // Convert input into an array of numbers
+        const age = document.getElementById('age').value;
+
+        console.log(sapId, age);
+
+        if (!email) {
+        alert('Email is required');
+        return;
+        }
+
+        if (!/\S+@\S+\.\S+/.test(email)) {
+        alert('Invalid email format');
+        return;
+        }
+
+        document.getElementById('verification-status').classList.remove('hidden');
+
+        try {
+            const proofData = await generateZKProof(age, sapId);
+
+            const verificationResult = await verifyProof(proofData);
+
+            if (verificationResult) {
+                const registration = await registerUser(email);
+
+                console.log(registration);
+                if (registration) {
+                    document.cookie = "digital_identity="+(registration.privateIdentity);
+                    window.location.href = '/success';
+                }
+            } else {
+                alert('Proof verification failed.');
+            }
+        } catch (error) {
+            console.error('Registration failed:', error);
+            alert('An error occurred during registration.');
+        }
+});
+
+</script>
+</body>
+</html>
