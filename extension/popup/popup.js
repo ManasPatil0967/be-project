@@ -28,9 +28,9 @@ async function init() {
     try {
         // Check if user is authenticated
         const identity = await chrome.cookies.get({
-            url: 'http://34.55.135.135:5000/',
-            name: 'digital_identity'
-        }) || sample;
+            url: 'http://34.173.183.183:5000/',
+            name: 'digital_identity_kPK'
+        }) // || sample;
         console.log(identity);
         if (identity) {
             //currentUser = await fetchUserInfo(identity.value);
@@ -94,12 +94,14 @@ async function generatePassword() {
         // Get keypair from cookies
         const keypair = await chrome.cookies.get({
             url: VM1_BASE_URL,
-            name: 'keypair'
-        }) || sample.privateIdentity.kyberPrivateKey+sample.privateIdentity.dilithiumPrivateKey;
+            name: 'digital_identity_kPK'
+        }) // || sample.privateIdentity.kyberPrivateKey+sample.privateIdentity.dilithiumPrivateKey;
 
         if (!keypair) {
             throw new Error('No keypair found');
         }
+
+        console.log(keypair+currentTab.url);
 
         // Get password requirements from website
         const requirements = await detectPwReq(currentTab.id);
@@ -111,7 +113,7 @@ async function generatePassword() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                keypair: keypair,
+                keypair: keypair+currentTab.url,
                 requirements,
                 website: hostname
             })
@@ -132,16 +134,16 @@ async function generatePassword() {
         //     password
         // });
 
-        const passwordField = document.querySelector('input[type="password"]' || 'input[name="password"]' || 'input[name="pass"]');
-        if (passwordField) {
-            passwordField.value = password;
-
-            // Trigger input and change events to ensure the webpage detects the update
-            passwordField.dispatchEvent(new Event('input', { bubbles: true }));
-            passwordField.dispatchEvent(new Event('change', { bubbles: true }));
-        } else {
-            console.error("Password field not found!");
-        }
+        //const passwordField = document.querySelector('input[type="password"]' || 'input[name="password"]' || 'input[name="pass"]');
+        //if (passwordField) {
+        //    passwordField.value = password;
+        //
+        //    // Trigger input and change events to ensure the webpage detects the update
+        //    passwordField.dispatchEvent(new Event('input', { bubbles: true }));
+        //    passwordField.dispatchEvent(new Event('change', { bubbles: true }));
+        //} else {
+        //    console.error("Password field not found!");
+        //}
 
         alert('Password generated and filled successfully');
 
@@ -162,7 +164,7 @@ async function detectPwReq(tabId) {
         const [requirements] = await chrome.scripting.executeScript({
             target: { tabId },
             function: () => {
-                const passwordField = document.querySelector('input[type="password"]');
+                const passwordField = document.querySelector('input[type="password"]' || 'input[name="password"]' || 'input[name="pass"]');
                 if (!passwordField) return null;
 
                 // Get requirements from aria attributes or other metadata
@@ -220,10 +222,10 @@ logoutBtn.addEventListener('click', async () => {
         url: VM1_BASE_URL,
         name: 'digital_identity'
     });
-    await chrome.cookies.remove({
-        url: VM1_BASE_URL,
-        name: 'keypair'
-    });
+    //await chrome.cookies.remove({
+    //    url: VM1_BASE_URL,
+    //    name: 'keypair'
+    //});
     
     // Reset state and show landing view
     currentUser = null;
