@@ -1,0 +1,363 @@
+root@instance-fyp-3:/home/patilmanas489# cat /root/.bash_history
+cd ..
+ls
+cd manas
+ls
+cd ..
+cd -
+apt install build-essential git
+git clone https://github.com/openssl/openssl
+git clone https://github.com/open-quantum-safe/oqs-provider
+git clone https://github.com/open-quantum-safe/liboqs
+cd openssl
+./Configure --prefix=/opt/openssl --openssldir=/usr/local/ssl
+make
+make install
+cd ..
+cd liboqs
+cd ..
+sudo apt install astyle cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz python3-yaml valgrind
+cp -r liboqs /usr/local/src/
+cd /usr/local/src
+ls
+cd liboqs
+mkdir build && cd build
+cmake -GNinja ..
+ninja
+ninja run_tests
+sudo ninja install
+cd -
+cd ..
+mv -r /home/manas/oqs-provider ./
+ls
+mv /home/manas/oqs-provider ./
+ls
+cd oqs-provider
+cmake -DOPENSSL_ROOT_DIR=/usr/local/ssl -S . -B _build && cmake --build _build && sudo cmake --install _build
+cd /usr/local/ssl
+vim .
+which openssl
+vim .
+/opt/openssl/bin/openssl version
+vim .
+sudo cp /usr/lib/x86_64-linux-gnu/ossl-modules/oqsprovider.so /opt/openssl/lib64/ossl-modules/oqsprovider.so
+vim .
+ldconfig
+/opt/openssl/bin/openssl version -a
+/opt/openssl/bin/openssl list -providers
+mkdir /home/manas/kyber_cert
+cd /home/manas/kyber_cert
+vim script.sh
+bash script.sh
+ll
+ls -l
+/opt/openssl/bin/openssl s_server -cert /home/manas/kyber_cert/dilithium3_srv.crt -key /home/manas/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider
+cd /usr/local/src
+cd oqs-provider
+cmake -DOPENSSL_ROOT_DIR=/opt/openssl -S . -B _build && cmake --build _build && sudo cmake --install _build
+cd /home/manas/kyber_cert
+/opt/openssl/bin/openssl s_server -cert /home/manas/kyber_cert/dilithium3_srv.crt -key /home/manas/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider
+/opt/openssl/bin/openssl list -providers
+/opt/openssl/bin/openssl version -a
+cd ..
+rm -rf kyber_cert
+ls
+cd /usr/local/src
+ls
+rm -rf ./
+rm -rf liboqs oqs-provider
+cd ..
+ls
+cd bin
+ls
+cd /opt
+ls
+rm -rf openssl
+cd /home/manas
+cd openssl
+cd /usr/local/src
+wget https://github.com/openssl/openssl/releases/download/openssl-3.3.1/openssl-3.3.1.tar.gz
+cd /usr/local/src/openssl-3.3.1
+./Configure --prefix=/usr/local/ssl --openssldir=/usr/local/ssl '-Wl,--enable-new-dtags,-rpath,$(LIBRPATH)'
+make -j8
+make test
+sudo make install
+/usr/local/ssl/bin/openssl version -a
+ls
+wget https://github.com/openssl/openssl/releases/download/openssl-3.4.0/openssl-3.4.0.tar.gz
+tar -xvf openssl-3.4.0.tar.gz
+cd /usr/local/src/openssl-3.4.0
+./Configure --prefix=/usr/local/ssl --openssldir=/usr/local/ssl '-Wl,--enable-new-dtags,-rpath,$(LIBRPATH)'
+make -j8
+make test
+sudo make install
+/usr/local/ssl/bin/openssl version -a
+sudo apt install astyle cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz python3-yaml valgrind
+cd /usr/local/src
+git clone https://github.com/open-quantum-safe/liboqs
+cd liboqs
+mkdir build && cd build
+cmake -GNinja ..
+ninja
+ninja run_tests
+sudo ninja install
+cd /usr/local/src
+git clone https://github.com/open-quantum-safe/oqs-provider
+cd oqs-provider
+cmake -DOPENSSL_ROOT_DIR=/usr/local/ssl -S . -B _build && cmake --build _build && sudo cmake --install _build
+cd _build && ctest --parallel 5 --rerun-failed --output-on-failure -V
+cd /home/mnaas
+cd /home/manas
+ls
+mkdir kyber_cert
+cd kyber_cert
+vim script.sj
+vim script.sh
+/usr/local/ssl/bin/openssl req -x509 -new -newkey dilithium3 -keyout dilithium3_CA.key -out dilithium3_CA.crt -nodes -subj "/CN=test CA" -days 365 -config /usr/local/ssl/openssl.cnf
+/usr/local/ssl/bin/openssl genpkey -algorithm dilithium3 -out dilithium3_srv.key
+/usr/local/ssl/bin/openssl req -new -newkey dilithium3 -keyout dilithium3_srv.key -out dilithium3_srv.csr -nodes -subj "/CN=test server" -config /usr/local/ssl/openssl.cnf
+/usr/local/ssl/bin/openssl x509 -req -in dilithium3_srv.csr -out dilithium3_srv.crt -CA dilithium3_CA.crt -CAkey dilithium3_CA.key -CAcreateserial -days 365
+/usr/local/ssl/bin/openssl s_server -cert /home/manas/kyber_cert/dilithium3_srv.crt -key /home/manas/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider
+vim /etc
+cd jjdp
+cd ..
+ls
+cd manas
+ls
+ls
+cd ../manas
+ls
+git clone https://github.com/ManasPatil0967/be-project proj
+cd proj
+vim .
+vim .
+cd ..
+cd kyber_cert
+/usr/local/ssl/bin/openssl list --providers
+/usr/local/ssl/bin/openssl s_server -cert /home/manas/kyber_cert/dilithium3_srv.crt -key /home/manas/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider
+/usr/local/ssl/bin/openssl s_server -cert /home/manas/kyber_cert/dilithium3_srv.crt -key /home/manas/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider &
+/usr/local/ssl/bin/openssl s_server -cert /home/manas/kyber_cert/dilithium3_srv.crt -key /home/manas/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider &>
+/usr/local/ssl/bin/openssl s_server -cert /home/manas/kyber_cert/dilithium3_srv.crt -key /home/manas/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider &> log.txt
+ps aux
+cd ..
+cd manas
+ls
+cp -r kyber_cert proj/
+cd proj
+ls
+git add . ; git commit -m "PQC SSL certificates CA and cli-srv"
+git push
+cd anas
+cd manas
+ls
+cd ../manas
+ls
+ps aux
+vim .
+cd proj
+git status
+git add . ; git commit -m "PQC SSL certificates CA and cli-srv"
+git push
+cd ..
+vim .
+env | grep LD_LIBRARY_PATH
+cd kyber_cert
+ls
+/usr/local/ssl/bin/openssl req -x509 -new -newkey dilithium3 -keyout dilithium3_CA.key -out dilithium3_CA.crt -nodes -subj "/CN=VM2 CA" -days 365 -config /usr/local/ssl/openssl.cnf
+/usr/local/ssl/bin/openssl genpkey -algorithm dilithium3 -out dilithium3_cli.key
+/usr/local/ssl/bin/openssl req -new -key dilithium3_cli.key -out dilithium3_cli.csr -nodes -subj "/CN=VM2 Client" -config /usr/local/ssl/openssl.cnf
+/usr/local/ssl/bin/openssl x509 -req -in dilithium3_cli.csr -out dilithium3_cli.crt -CA dilithium3_CA.crt -CAkey dilithium3_CA.key -CAcreateserial -days 365
+/usr/local/ssl/bin/openssl s_client -connect localhost:4433 -cert dilithium3_cli.crt -key dilithium3_cli.key -groups kyber768
+kill -9 1000
+ps aux
+/usr/local/ssl/bin/openssl s_server -cert /home/manas/kyber_cert/dilithium3_srv.crt -key /home/manas/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider &> log.txt
+ls
+vim .
+ps aux
+/usr/local/ssl/bin/openssl s_server -cert /home/manas/kyber_cert/dilithium3_srv.crt -key /home/manas/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider
+vim .
+/usr/local/ssl/bin/openssl version
+vim .
+cat /root/.bash_history
+vim /root/.bash_history
+vim /usr/local/ssl/openssl.cnf
+vim /root/.bash_history
+cat /root/.bash_history | grep "/usr/local/ssl/bin/openssl"
+/usr/local/ssl/bin/openssl version -a
+npm 
+node
+ls
+cd ../manas
+ls
+cd proj
+ls
+cd kyber_cert
+vim .
+cd ..
+cd ..
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash ; export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+nvm install 18.19.0
+npm -v
+cd proj
+npm i
+npm i -g pm2
+pm2 list
+vim .
+vim /root/.vimrc
+vim .
+cd kyber_cert
+/usr/local/ssl/bin/openssl s_client -connect 34.56.180.245:4433 -cert dilithium3_cli.crt -key dilithium3_cli.key -groups kyber768
+ls
+bash ../cert_cli_init.sh
+ls
+/usr/local/ssl/bin/openssl s_client -connect 34.56.180.245:4433 -cert dilithium3_cli.crt -key dilithium3_cli.key -groups kyber768
+/usr/local/ssl/bin/openssl s_client -connect 34.56.180.245:4433 -cert dilithium3_cli.crt -key dilithium3_cli.key -groups kyber768 &> cli_log.txt
+vim cli_log.txt
+cd ../manas
+cd proj
+cd kyber_cert && /usr/local/ssl/bin/openssl s_server -cert dilithium3_srv.crt -key dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider &> serv_log.txt
+ps aux
+nohup /usr/local/ssl/bin/openssl s_server -cert dilithium3_srv.crt -key dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider &> serv_log.txt
+ps aux
+nohup /usr/local/ssl/bin/openssl s_server -cert dilithium3_srv.crt -key dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider &
+m
+ps aux
+mls
+ls
+vim .
+vim .
+ps aux
+kill -9 19910
+ps aux
+vim .
+git status
+cd ..
+git pull
+git add .
+git commit -m "TLS Handshake successful 2"
+git push
+ls
+cd ../manas
+ls
+cd proj
+ls
+cd extension/server
+ls
+pm2 start index.js
+vim .
+pm2 kill
+cd proj
+cd ../manas
+ls
+cd proj
+cd extension/server
+pm2 start index.js
+cd ../..
+git pull
+vim .
+vim .
+vim .
+cp extension/*.ps1 extension/circuit.circom web-app
+cd web-app
+ls
+vim .
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+bash circom_setup.sh
+ls
+mv -r circom /home/manas
+mv circom /home/manas
+cd /home/manas
+ls
+cd circom
+vim .
+cargo
+rustc
+curl https://sh.rustup.rs -sSf | sh
+. "$HOME/.cargo/env"
+cargo
+cargo build --release
+pm2 list
+pm2 kill
+cd ../proj
+cd extension/server
+vim .
+node -v
+npm i
+pm2 start index.js
+pm2 list
+pm2 log
+ls
+vim .
+cp /home/manas/proj/crypto-kernel/hashing/libkdf.so .
+ls
+pm2 kill
+pm2 start index.js
+pm2 log
+pm2 log
+vim .
+vim .
+pm2 log
+pm2 log
+vim .
+vim .
+cat index.js
+cd ../..
+cd crypto-kernel
+cd hashing
+gcc -shared -o libkdf2.so -O3 kdf.c fips202.c symmetric-shake.c
+ls
+ls | grep ".c"
+cp libkdf2.so /home/manas/proj/extension/server
+cd ..
+vim .
+cd kem
+gcc -shared -o libkyber768.so -O3 kyber_api.c kyber_bin.c indcpa.c kem.c fips202.c ntt.c symmetric-shake.c cbd.c poly.c polyvec.c randombytes.c reduce.c verify.c
+gcc -shared -o libkyber768.so -fPIC -O3 kyber_api.c kyber_bin.c indcpa.c kem.c fips202.c ntt.c symmetric-shake.c cbd.c poly.c polyvec.c randombytes.c reduce.c verify.c
+cp libkyber768.so /home/manas/proj/extension/server
+cd ..A
+cd sign
+gcc -shared -o libkyber768.so -fPIC -O3 signing_api.c sign.c rounding.c fips202.c ntt.c packing.c poly.c polyvec.c randombytes.c reduce.c symmetric-shake.c
+gcc -shared -o libsignO3.so -fPIC -O3 signing_api.c sign.c rounding.c fips202.c ntt.c packing.c poly.c polyvec.c randombytes.c reduce.c symmetric-shake.c
+cp libsignO3.so /home/manas/proj/extension/server
+cd ../..
+cd extension/server
+ls
+vim index.js
+pm2 kill
+pm2 start index.js
+pm2 log
+nm libsignO3.so
+cd -
+cd crypto-kernel/sign
+gcc -shared -o libsignO3.so -fPIC -O3 sign_extern.c signing_api.c sign.c rounding.c fips202.c ntt.c packing.c poly.c polyvec.c randombytes.c reduce.c symmetric-shake.c
+cp libsignO3.so /home/manas/proj/extension/server
+cd -
+cd extension/serber
+cd extension/server
+pm2 kill
+pm2 start index.js
+pm2 list
+pm2 log
+cd ../manas
+vim proj
+pm2 list
+pm2 log
+cd proj
+cd ../manaspatil0967
+cd ../manas
+cd proj
+vim .
+cd extension/server
+pm2 kill
+pm2 start index.js
+cd ../manas
+cd proj
+git status
+git pull
+git add . ; git commit -m "VM1 changes to the FFI server"
+git push
+git pull
+pm2 kill
