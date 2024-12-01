@@ -128,7 +128,11 @@ document.getElementById('registration-form').addEventListener('submit', async (e
 
                 console.log(registration);
                 if (registration) {
+                    const kPK = registration.privateIdentity.kyberPrivateKey;
+                    const dPK = registration.privateIdentity.dilithiumPrivateKey;
+                    console.log(kPK, dPK);
                     document.cookie = "digital_identity="+(registration.privateIdentity);
+                    document.cookie = "digital_identity_kPK="+(kPK.substring(0, 31));
                     window.location.href = '/success';
                 }
             } else {
