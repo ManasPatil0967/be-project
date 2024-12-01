@@ -17,18 +17,18 @@ const uint8_t_array = ArrayType(uint8_t);
 const size_t_ptr = ref.refType(size_t);
 
 
-const kyber = ffi.Library('./libkyberO3.so', {
+const kyber = ffi.Library('./libkyber768.so', {
     'buf_gen_keypair': [uint8_t_ptr, []],
     'buf_encrypt': [uint8_t_ptr, [uint8_t_ptr, uint8_t_ptr, uint8_t_ptr]],
     'buf_decrypt': [uint8_t_ptr, [uint8_t_ptr, uint8_t_ptr, uint8_t_ptr]],
     'buf_free': ['void', [uint8_t_ptr]],
 });
 
-const dilithiumLib = ffi.Library('./libsign2.so', {
+const dilithiumLib = ffi.Library('./libsignO3.so', {
     'gen_keypair': ['int', [uint8_t_ptr, uint8_t_ptr]],
 });
 
-const kdf = ffi.Library('./libkdf.so', {
+const kdf = ffi.Library('./libkdf2.so', {
     'kdf': [uint8_t_ptr, [uint8_t_ptr, size_t, uint8_t_ptr, size_t]],
 });
 
@@ -111,16 +111,16 @@ app.post('/gen-identity', (req, res) => {
 
 app.post('/gen-password', (req, res) => {
     try {
-        const { sk1, sk2 } = req.body;
+        const { keypair, requirements, website  } = req.body;
 
-        if (!sk1 || !sk2) {
+        if (!keypair) {
             return res.status(400).json({ error: 'Missing required keys' });
         }
 
         
         const inputBuffer = Buffer.concat([
-            Buffer.from(sk1, 'hex'),
-            Buffer.from(sk2, 'hex'),
+            Buffer.from(keypair, 'hex'),
+            Buffer.from(website, 'hex'),
         ]);
 
         const outputBuffer = Buffer.alloc(32); 

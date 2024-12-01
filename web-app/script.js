@@ -20,7 +20,7 @@ const verifyProof = async (proofData) => {
 }
 
 const registerUser = async (email) => {
-    const res = await fetch('https://vm1.dappnode.net/gen-identity', {
+    const res = await fetch('https://34.55.135.135:3000/gen-identity', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
