@@ -1,0 +1,265 @@
+root@instance-fyp-test:/home/anshdj77# cat /root/.bash_history
+apt install build-essential git
+cd /usr/local/src
+ldconfig
+vim script.sh
+bash script.sh
+vim ../ssl/openssl.cnf
+cd /home/manaspatil0967
+mkdir kyber_cert
+cd kyber_cert
+/usr/local/ssl/bin/openssl version -a
+/usr/local/ssl/bin/openssl req -x509 -new -newkey dilithium3 -keyout dilithium3_CA.key -out dilithium3_CA.crt -nodes -subj "/CN=test CA" -days 365 -config /usr/local/ssl/openssl.cnf
+/usr/local/ssl/bin/openssl genpkey -algorithm dilithium3 -out dilithium3_srv.key
+/usr/local/ssl/bin/openssl req -new -newkey dilithium3 -keyout dilithium3_srv.key -out dilithium3_srv.csr -nodes -subj "/CN=test server" -config /usr/local/ssl/openssl.cnf
+/usr/local/ssl/bin/openssl x509 -req -in dilithium3_srv.csr -out dilithium3_srv.crt -CA dilithium3_CA.crt -CAkey dilithium3_CA.key -CAcreateserial -days 365
+/usr/local/ssl/bin/openssl s_server -cert /home/manas/kyber_cert/dilithium3_srv.crt -key /home/manas/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider
+ls
+/usr/local/ssl/bin/openssl s_server -cert /home/manaspatil0967/kyber_cert/dilithium3_srv.crt -key /home/manaspatil0967/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider
+/usr/local/ssl/bin/openssl s_server -cert /home/manaspatil0967/kyber_cert/dilithium3_srv.crt -key /home/manaspatil0967/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider &> log
+ps aux
+/usr/local/ssl/bin/openssl s_server -cert /home/manaspatil0967/kyber_cert/dilithium3_srv.crt -key /home/manaspatil0967/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider &
+/usr/local/ssl/bin/openssl s_server -cert /home/manaspatil0967/kyber_cert/dilithium3_srv.crt -key /home/manaspatil0967/kyber_cert/dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider
+ps aux
+/usr/local/ssl/bin/openssl s_client -connect localhost:4433 -cert dilithium3_cli.crt -key dilithium3_cli.key -groups kyber768
+cd kyber_cert
+/usr/local/ssl/bin/openssl req -x509 -new -newkey dilithium3 -keyout dilithium3_CA.key -out dilithium3_CA.crt -nodes -subj "/CN=VM2 CA" -days 365 -config /usr/local/ssl/openssl.cnf
+/usr/local/ssl/bin/openssl genpkey -algorithm dilithium3 -out dilithium3_cli.key
+/usr/local/ssl/bin/openssl req -new -key dilithium3_cli.key -out dilithium3_cli.csr -nodes -subj "/CN=VM2 Client" -config /usr/local/ssl/openssl.cnf
+/usr/local/ssl/bin/openssl x509 -req -in dilithium3_cli.csr -out dilithium3_cli.crt -CA dilithium3_CA.crt -CAkey dilithium3_CA.key -CAcreateserial -days 365
+/usr/local/ssl/bin/openssl s_client -connect localhost:4433 -cert dilithium3_cli.crt -key dilithium3_cli.key -groups kyber768
+ls
+git clone https://github.com/ManasPatil0967/be-project proj
+cd proj
+ls
+cd kyber_cert
+ls
+cd ..
+cd web-app
+vim index.js
+cd ~
+cd -
+cd ../..
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm
+nvm install 18.19.0
+npm i
+cd proj
+npm i
+npm i -g pm2
+pm2 list
+cd web-app
+vim .
+cd ../..
+vim .vimrc
+cd proj
+vim .
+vim /root/.vimrc
+vim .
+vim /root/.vimrc
+vim .
+vim /root/.vimrc
+vim .
+vim .
+find / -name ".vimrc"
+vim .
+vim .
+vim /root/.vimrc
+vim .
+vim /root/.vimrc
+vim /root/.vimrc
+vim /root/.vimrc
+cat /root/.vimrc
+vim /root/.vimrc
+vim /root/.vimrc
+cd proj
+vim .
+cd kyber_cert
+/usr/local/ssl/bin/openssl s_server -cert dilithium3_srv.crt -key dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider
+ps aux
+cd proj
+cd kyber_cert
+/usr/local/ssl/bin/openssl s_server -cert dilithium3_srv.crt -key dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider &
+/usr/local/ssl/bin/openssl s_server -cert dilithium3_srv.crt -key dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider &> serv_log.txt
+vim .
+ps aux
+kill -9 110396
+ps aux
+nohup /usr/local/ssl/bin/openssl s_server -cert dilithium3_srv.crt -key dilithium3_srv.key -www -tls1_3 -groups kyber768:frodo640shake -debug -security_debug_verbose -provider oqsprovider &
+nohup /usr/local/ssl/bin/openssl s_client -connect 34.55.135.135:4433 -cert dilithium3_cli.crt -key dilithium3_cli.key -groups kyber768 &
+ps aux
+/usr/local/ssl/bin/openssl s_client -connect 34.55.135.135:4433 -cert dilithium3_cli.crt -key dilithium3_cli.key -groups kyber768
+ls
+vim .
+bash ../cert_cli_init.sh
+ps aux
+nohup /usr/local/ssl/bin/openssl s_client -connect 34.55.135.135:4433 -cert dilithium3_cli.crt -key dilithium3_cli.key -groups kyber768 &
+ps aux
+ls
+vim .
+cat nohup.pout
+cat nohup.out
+vim .
+/usr/local/ssl/bin/openssl s_client -connect 34.55.135.135:4433 -cert dilithium3_cli.crt -key dilithium3_cli.key -groups kyber768
+vim .
+git status
+git restore dilithium3_CA.crt dilithium3_CA.key dilithium3_CA.srl 
+git status
+vim .
+git status
+cd ..
+git add .
+git commit -m "TLS handshake successful"
+git push
+git pull
+ls
+cd ..
+ls
+cd manas
+ls
+cd ../manaspatil0967
+ls
+cd proj
+ls
+cd web-app
+vim .
+pm2 start index.js
+pm2 list
+vim .
+pm2 kill
+cd ../manaspatil0967
+ls
+cd proj
+cd web-app
+pm2 start index.js
+vim .
+npx tailwindcss -i input.css -o output.css
+pm2 restart
+pm2 restart 1960
+pm2 kill
+pm2 start index.js
+vim .
+pm2 kill ; pm2 start index.js
+cd ../..
+cd proj
+git pull
+vim .
+vim .
+pm2 list
+cd ..
+curl https://sh.rustup.rs -sSf | sh
+. "$HOME/.cargo/env"
+git clone https://github.com/iden3/circom.git
+cd circom
+cargo build --release
+cargo install --path circom
+circom --help
+cd ../manaspatil0967
+cargo
+cd circom
+cargo install --path circom
+circom --version
+cd ..
+cd proj
+vim .
+cp extension/*.ps1 extension/circuit.circom web-app
+vim .
+cd web-app
+vim .
+bash script.sh
+vim .
+circom circuit.circom --r1cs --wasm --sym --c
+bash script.sh
+npm i
+bash script.sh
+cd ..
+npm i
+cd -
+bash script.sh
+cd ..
+npm i -g snarkjs
+cd -
+bash script.sh
+vim .
+vim .
+vim .
+pm2 kill
+pm2 start index.js
+vim .
+pm2 kill
+pm2 start index.js
+ls
+vim .
+cd ..
+cp node_modules/snarkjs/build/snarkjs.min.js web-app
+cd -
+ls
+cd -
+cp node_modules/snarkjs/build/snarkjs.js web-app
+cd -
+vim .
+pm2 kill ; pm2 start index.js
+ls
+cp snarkjs.js snarkjs.min.js circuit.zkey verification_key.json public
+vim .
+cp circuit.wasm public
+vim .
+cp circuit_js/circuit.wasm public
+vim .
+pm2 kill ; pm2 start index.js
+pm2 log
+vim .
+pm2 kill ; pm2 start index.js
+vim .
+pm2 kill ; pm2 start index.js
+vim .
+pm2 kill ; pm2 start index.js
+vim .
+pm2 kill ; pm2 start index.js
+vim .
+pm2 kill ; pm2 start index.js
+pm2 log
+pm2 log
+ls
+cd ../manaspatil0967
+cd proj
+vim .
+pm2 kill ; pm2 start index.js
+cd web-app
+pm2 kill ; pm2 start index.js
+vim .
+pm2 kill ; pm2 start index.js
+vim .
+cd ../manaspatil0967
+cd proj
+cd web-app
+vim .
+cat public/index.html
+vim .
+pm2 kill ; pm2 start index.js
+vim .
+pm2 kill ; pm2 start index.js
+vim .
+pm2 kill ; pm2 start index.js
+vim .
+pm2 kill ; pm2 start index.js
+vim .
+pm2 kill ; pm2 start index.js
+vim .
+pm2 kill ; pm2 start index.js
+ls
+cd proj
+git status
+git pull
+git diff web-app/circuit.circom
+git diff
+vim .
+vim .
+git pull
+git status
+git add .
+git commit -m "VM2 changes made to the app"
+git push
+pm2 kill
