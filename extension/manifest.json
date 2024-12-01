@@ -24,7 +24,21 @@
     },
     "host_permissions": [
         "http://34.122.47.164:3000/*",
-        "http://34.31.130.113:3000/*"
-    ]
+        "http://34.31.130.113:3000/*",
+        "http://34.173.183.183:5000/*",
+        "http://34.55.135.135:5000/*"
+    ],
+    "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "web_accessible_resources": [
+  {
+    "resources": ["popup/saved-sites.html"],
+    "matches": ["<all_urls>"]
+  }
+]
 }
 
