@@ -61,88 +61,105 @@
 
     <script>
 
-    const generateZKProof = async (age, sapId) => {
-        const { proof, publicSignals } = await snarkjs.groth16.fullProve(
+        const generateZKProof = async (age, sapId) => {
+            const { proof, publicSignals } = await snarkjs.groth16.fullProve(
                 { age: Number(age), sapID: sapId },
                 'circuit.wasm',
                 'circuit.zkey'
-                );
+            );
 
-        console.log(proof, publicSignals);
-        return { proof, publicSignals };
-    };
+            console.log(proof, publicSignals);
+            return { proof, publicSignals };
+        };
 
-const verifyProof = async (proofData) => {
-    const { proof, publicSignals } = proofData;
+        const verifyProof = async (proofData) => {
+            const { proof, publicSignals } = proofData;
 
-    const vKey = await fetch('verification_key.json').then((res) => res.json());
+            const vKey = await fetch('verification_key.json').then((res) => res.json());
 
-    return snarkjs.groth16.verify(vKey, publicSignals, proof);
-};
+            return snarkjs.groth16.verify(vKey, publicSignals, proof);
+        };
 
-const registerUser = async (email) => {
-    const res = await fetch('http://34.55.135.135:3000/gen-identity/', {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json',
-},
-body: JSON.stringify({ email }),
-});
+        const registerUser = async (email) => {
+            const res = await fetch('http://34.55.135.135:3000/gen-identity/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            });
 
-if (!res.ok) {
-    throw new Error('Failed to register user');
-}
-
-return await res.json();
-};
-
-document.getElementById('registration-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const email = document.getElementById('email').value;
-        const sapIdVal = document.getElementById('sapId').value;
-        const sapId = sapIdVal.split('').map(Number); // Convert input into an array of numbers
-        const age = document.getElementById('age').value;
-
-        console.log(sapId, age);
-
-        if (!email) {
-        alert('Email is required');
-        return;
-        }
-
-        if (!/\S+@\S+\.\S+/.test(email)) {
-        alert('Invalid email format');
-        return;
-        }
-
-        document.getElementById('verification-status').classList.remove('hidden');
-
-        try {
-            const proofData = await generateZKProof(age, sapId);
-
-            const verificationResult = await verifyProof(proofData);
-
-            if (verificationResult) {
-                const registration = await registerUser(email);
-
-                console.log(registration);
-                if (registration) {
-                    const kPK = registration.privateIdentity.kyberPrivateKey;
-                    const dPK = registration.privateIdentity.dilithiumPrivateKey;
-                    console.log(kPK, dPK);
-                    document.cookie = "digital_identity="+(registration.privateIdentity);
-                    document.cookie = "digital_identity_kPK="+(kPK.substring(0, 31));
-                    window.location.href = '/success';
-                }
-            } else {
-                alert('Proof verification failed.');
+            if (!res.ok) {
+                throw new Error('Failed to generate identity');
             }
-        } catch (error) {
-            console.error('Registration failed:', error);
-            alert('An error occurred during registration.');
-        }
-});
+
+            const res2 = await fetch('http://34.173.183.183:3000/api/users/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    emailHash: res.publicIdentity.emailHash,
+                    kyberPublicKey: res.publicIdentity.kyberPublicKey,
+                    dilithiumPublicKey: res.publicIdentity.dilithiumPublicKey,
+                    kyberPrivateKey: res.privateIdentity.kyberPrivateKey,
+                    dilithiumPrivateKey: res.privateIdentity.dilithiumPrivateKey
+                }),
+            });
+
+            if (!res2.ok) {
+                throw new Error('Failed to register user');
+            }
+
+            return await res.json();
+        };
+
+        document.getElementById('registration-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const sapIdVal = document.getElementById('sapId').value;
+            const sapId = sapIdVal.split('').map(Number); // Convert input into an array of numbers
+            const age = document.getElementById('age').value;
+
+            console.log(sapId, age);
+
+            if (!email) {
+                alert('Email is required');
+                return;
+            }
+
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                alert('Invalid email format');
+                return;
+            }
+
+            document.getElementById('verification-status').classList.remove('hidden');
+
+            try {
+                const proofData = await generateZKProof(age, sapId);
+
+                const verificationResult = await verifyProof(proofData);
+
+                if (verificationResult) {
+                    const registration = await registerUser(email);
+
+                    console.log(registration);
+                    if (registration) {
+                        const kPK = registration.privateIdentity.kyberPrivateKey;
+                        const dPK = registration.privateIdentity.dilithiumPrivateKey;
+                        console.log(kPK, dPK);
+                        document.cookie = "digital_identity_kPK="+(kPK.substring(0, 31));
+                        window.location.href = '/success';
+                    }
+                } else {
+                    alert('Proof verification failed.');
+                }
+            } catch (error) {
+                console.error('Registration failed:', error);
+                alert('An error occurred during registration.');
+            }
+        });
 
 </script>
 </body>
